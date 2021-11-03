@@ -1,0 +1,27 @@
+{
+  "name": "birdy",
+  "version": "0.0.1",
+  "description": "Birdy is bringing combinators and combinatory logic to typescript",
+  "main": "avian.ts",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jasmine-ts spec/*.ts"
+  },
+  "keywords": [
+    "functional",
+    "combinator",
+    "combinatory",
+    "logic"
+  ],
+  "author": "Y2J2142",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jasmine": "^3.10.2",
+    "jasmine": "^3.10.0",
+    "jasmine-spec-reporter": "^7.0.0",
+    "jasmine-ts": "^0.4.0",
+    "ts-node": "^10.4.0"
+  }
+}
