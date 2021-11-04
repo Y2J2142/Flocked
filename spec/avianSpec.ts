@@ -1,4 +1,5 @@
 import { idiot } from '../avian';
+import { kestrel } from '../avian'
 
 
 describe("Testing idiot combinator", () => {
@@ -14,12 +15,21 @@ describe("Testing idiot combinator", () => {
 
 
     it("number", () => {
-        expect(numbers.every(n => n === idiot(n))).toEqual(true);
+        expect(numbers.every(n => n === idiot(n))).toEqual(true)
     })
     it("string", () => {
-        expect(strings.every(s => s === idiot(s))).toEqual(true);
+        expect(strings.every(s => s === idiot(s))).toEqual(true)
     })
     it("tuples", () => {
         expect(zip(numbers, strings).every(t => t === idiot(t))).toEqual(true)
+    })
+})
+
+describe("Testing kestrel combinator", () => {
+    it("number", () => {
+        const numbers = [...Array(10)]
+        const functions = numbers.map(kestrel);
+
+        expect(numbers.every((elem, idx) => elem == functions[idx]())).toEqual(true)
     })
 })
