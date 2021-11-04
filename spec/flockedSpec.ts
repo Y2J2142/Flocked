@@ -1,9 +1,9 @@
-import { idiot } from '../flocked';
+import { idiot } from '../flocked'
 import { kestrel } from '../flocked'
-
+import { bluebird } from '../flocked'
 
 describe("Testing idiot combinator", () => {
-    const randomNumber = (min: number, max: number): number => Math.random() * (max - min) + min;
+    const randomNumber = (min: number, max: number): number => Math.random() * (max - min) + min
     const numbers = [...Array(1000)].map(_ => randomNumber(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER))
     const strings = numbers.map(n => n.toString(randomNumber(2, 36)))
 
@@ -28,7 +28,7 @@ describe("Testing idiot combinator", () => {
 describe("Testing kestrel combinator", () => {
     it("number", () => {
         const numbers = [...Array(10)]
-        const functions = numbers.map(kestrel);
+        const functions = numbers.map(kestrel)
 
         expect(numbers.every((elem, idx) => elem == functions[idx]())).toEqual(true)
     })
@@ -37,6 +37,9 @@ describe("Testing kestrel combinator", () => {
 
 describe("Testing bluebird combinator", () => {
     it("unary functions", () => {
-
+        const f1 = (n: number) => n * 2
+        const parse = (str: string): number => Number.parseInt(str, 10)
+        const combined = bluebird(f1, parse)
+        expect(combined("10")).toEqual(20)
     })
 })
