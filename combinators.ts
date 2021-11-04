@@ -1,4 +1,4 @@
-import * as Birds from '../avian/avian'
+import * as Birds from '../flocked/flocked'
 export const identity = Birds.idiot;
 export const K = Birds.kestrel;
 

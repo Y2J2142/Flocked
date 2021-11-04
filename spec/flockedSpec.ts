@@ -1,5 +1,5 @@
-import { idiot } from '../avian';
-import { kestrel } from '../avian'
+import { idiot } from '../flocked';
+import { kestrel } from '../flocked'
 
 
 describe("Testing idiot combinator", () => {
@@ -31,5 +31,12 @@ describe("Testing kestrel combinator", () => {
         const functions = numbers.map(kestrel);
 
         expect(numbers.every((elem, idx) => elem == functions[idx]())).toEqual(true)
+    })
+})
+
+
+describe("Testing bluebird combinator", () => {
+    it("unary functions", () => {
+
     })
 })
