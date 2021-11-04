@@ -1,6 +1,7 @@
 import { idiot } from '../flocked'
 import { kestrel } from '../flocked'
 import { bluebird } from '../flocked'
+import { cardinal } from '../flocked'
 describe("Testing idiot combinator", () => {
     const randomNumber = (min: number, max: number): number => Math.random() * (max - min) + min
     const numbers = [...Array(1000)].map(_ => randomNumber(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER))
@@ -45,9 +46,18 @@ describe("Testing bluebird combinator", () => {
         expect(combined("10")).toEqual(20)
         expect(combined2(5, 5)).toEqual(20)
     })
-    it("Combining multiple functions", () => {
+    it("combining multiple functions", () => {
         const combined = bluebird(bluebird(f, parse), makeString)
         expect(combined(10)).toEqual(20)
     })
 
+})
+
+describe("Testing cardinal combinator", () => {
+    it("fliping binary function", () => {
+        const f = (n: number, str: string) => str + n.toString(10)
+        const flip = cardinal(f)
+        expect(flip("test", 10)).toEqual(f(10, "test"))
+
+    })
 })
