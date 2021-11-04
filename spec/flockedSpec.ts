@@ -1,7 +1,6 @@
 import { idiot } from '../flocked'
 import { kestrel } from '../flocked'
 import { bluebird } from '../flocked'
-
 describe("Testing idiot combinator", () => {
     const randomNumber = (min: number, max: number): number => Math.random() * (max - min) + min
     const numbers = [...Array(1000)].map(_ => randomNumber(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER))
@@ -36,10 +35,19 @@ describe("Testing kestrel combinator", () => {
 
 
 describe("Testing bluebird combinator", () => {
-    it("unary functions", () => {
-        const f1 = (n: number) => n * 2
-        const parse = (str: string): number => Number.parseInt(str, 10)
-        const combined = bluebird(f1, parse)
+    const f = (n: number) => n * 2
+    const parse = (str: string): number => Number.parseInt(str, 10)
+    const makeString = (n: number) => n.toString(10)
+    const add = (a: number, b: number) => a + b
+    it("combining two functions", () => {
+        const combined = bluebird(f, parse)
+        const combined2 = bluebird(f, add)
         expect(combined("10")).toEqual(20)
+        expect(combined2(5, 5)).toEqual(20)
     })
+    it("Combining multiple functions", () => {
+        const combined = bluebird(bluebird(f, parse), makeString)
+        expect(combined(10)).toEqual(20)
+    })
+
 })
