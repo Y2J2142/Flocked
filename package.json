@@ -1,7 +1,7 @@
 {
-  "name": "birdy",
+  "name": "avian",
   "version": "0.0.1",
-  "description": "Birdy is bringing combinators and combinatory logic to typescript",
+  "description": "Avian is bringing combinators and combinatory logic to typescript",
   "main": "avian.ts",
   "directories": {
     "lib": "lib"
@@ -12,8 +12,7 @@
   "keywords": [
     "functional",
     "combinator",
-    "combinatory",
-    "logic"
+    "combinatory logic"
   ],
   "author": "Y2J2142",
   "license": "ISC",
