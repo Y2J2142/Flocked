@@ -3,6 +3,12 @@
   "version": "0.0.1",
   "description": "Avian is bringing combinators and combinatory logic to typescript",
   "main": "avian.ts",
+  "homepage": "https://github.com/Y2J2142/Avian",
+  "bugs": "https://github.com/Y2J2142/Avian/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Y2J2142/Avian"
+  },
   "directories": {
     "lib": "lib"
   },
