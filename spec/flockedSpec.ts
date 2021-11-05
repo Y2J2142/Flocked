@@ -67,7 +67,7 @@ describe("Testing cardinal combinator", () => {
     })
 })
 
-describe("Testing cardinal combinator", () => {
+describe("Testing applicator combinator", () => {
     it("unary function", () => {
         const f = (n: number) => n * 2
         expect(applicator(f)(10)).toEqual(f(10))
