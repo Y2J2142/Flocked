@@ -44,12 +44,12 @@ describe("Testing bluebird combinator", () => {
     const f = (n: number) => n * 2
     const parse = (str: string): number => Number.parseInt(str, 10)
     const makeString = (n: number) => n.toString(10)
-    const add = (a: number, b: number) => a + b
+    const add = (a: number, b: string) => a + parseInt(b, 10)
     it("combining two functions", () => {
         const combined = bluebird(f, parse)
         const combined2 = bluebird(f, add)
         expect(combined("10")).toEqual(20)
-        expect(combined2(5, 5)).toEqual(20)
+        expect(combined2(5, "5")).toEqual(20)
     })
     it("combining multiple functions", () => {
         const combined = bluebird(bluebird(f, parse), makeString)
