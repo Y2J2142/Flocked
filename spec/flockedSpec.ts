@@ -1,4 +1,4 @@
-import { idiot } from '../flocked'
+import { idiot, psivVariadic } from '../flocked'
 import { kestrel } from '../flocked'
 import { bluebird } from '../flocked'
 import { cardinal } from '../flocked'
@@ -89,8 +89,9 @@ describe("Testing psi combinator", () => {
         const bin = (a: number, b: number) => a + b
         const f = (str: string) => parseInt(str, 10)
         expect(psi(bin, f)("10", "10")).toEqual(20)
-        //Below line should fail to compile btw
-        expect(psi(bin, f)("10", "10", "10", "10")).toEqual(20)
+        //Below line should ideally fail to compile btw
+        expect(psivVariadic(bin, f)("10", "10", "10", "10")).toEqual(20)
+        expect(psivVariadic((a: number, b: number, c: number) => a + b + c, (x: number) => x * 2)(5, 5, 5)).toEqual(30)
 
     })
 })

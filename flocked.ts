@@ -17,4 +17,6 @@ export const cardinal = <T, U, R>(f: BinaryCallable<T, U, R>) => (u: U, t: T) =>
 
 export const applicator = <T extends any[], U>(f: VariadicCallable<T, U>) => (...t: T) => f(...t);
 
-export const psi = <T, Args extends T[], U, R>(f: VariadicCallableSameType<T, R>, g: UnaryCallable<U, T>) => (...args: U[]) => f(...args.map(g))
+export const psi = <T, U, R>(f: BinaryCallable<T, T, R>, g: UnaryCallable<U, T>) => (a: U, b: U) => f(g(a), g(b))
+
+export const psivVariadic = <T, U, R>(f: VariadicCallableSameType<T, R>, g: UnaryCallable<U, T>) => (...args: U[]) => f(...args.map(g))
