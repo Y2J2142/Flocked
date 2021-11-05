@@ -3,3 +3,4 @@ export const identity = Birds.idiot
 export const K = Birds.kestrel
 export const B = Birds.bluebird
 export const C = Birds.cardinal
+export const IStar = Birds.applicator

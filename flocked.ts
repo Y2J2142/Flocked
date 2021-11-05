@@ -11,3 +11,5 @@ export const bluebird = <T extends any[], U, R>(outer: UnaryCallable<U, R>, inne
 export const bluebirdVariadic = <T extends any[]>(...t: T) => t.reduce((l, r) => bluebird(l, r))
 
 export const cardinal = <T, U, R>(f: BinaryCallable<T, U, R>) => (u: U, t: T) => f(t, u)
+
+export const applicator = <T extends any[], U>(f: VariadicCallable<T, U>) => (...t: T) => f(...t);

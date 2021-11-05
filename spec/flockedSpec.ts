@@ -2,6 +2,7 @@ import { idiot } from '../flocked'
 import { kestrel } from '../flocked'
 import { bluebird } from '../flocked'
 import { cardinal } from '../flocked'
+import { applicator } from '../flocked'
 describe("Testing idiot combinator", () => {
     const randomNumber = (min: number, max: number): number => Math.random() * (max - min) + min
     const numbers = [...Array(1000)].map(_ => randomNumber(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER))
@@ -59,5 +60,16 @@ describe("Testing cardinal combinator", () => {
         const flip = cardinal(f)
         expect(flip("test", 10)).toEqual(f(10, "test"))
 
+    })
+})
+
+describe("Testing cardinal combinator", () => {
+    it("unary function", () => {
+        const f = (n: number) => n * 2
+        expect(applicator(f)(10)).toEqual(f(10))
+    })
+    it("higher arity functions", () => {
+        const f = (...args: number[]) => args.reduce((a, b) => a + b)
+        expect(applicator(f)(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)).toEqual(f(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
     })
 })
