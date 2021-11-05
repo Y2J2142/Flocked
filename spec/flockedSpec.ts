@@ -76,4 +76,7 @@ describe("Testing applicator combinator", () => {
         const f = (...args: number[]) => args.reduce((a, b) => a + b)
         expect(applicator(f)(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)).toEqual(f(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
     })
+    it("different argument types", () => {
+        const f = (a: number, b: string, c: number) => a + c
+        expect(applicator(f)(1, " 2", 3)).toEqual(4)
 })
