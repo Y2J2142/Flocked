@@ -3,6 +3,7 @@ import { kestrel } from '../flocked'
 import { bluebird } from '../flocked'
 import { cardinal } from '../flocked'
 import { applicator } from '../flocked'
+import { psi } from '../flocked'
 describe("Testing idiot combinator", () => {
     const randomNumber = (min: number, max: number): number => Math.random() * (max - min) + min
     const numbers = [...Array(1000)].map(_ => randomNumber(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER))
@@ -79,4 +80,17 @@ describe("Testing applicator combinator", () => {
     it("different argument types", () => {
         const f = (a: number, b: string, c: number) => a + c
         expect(applicator(f)(1, " 2", 3)).toEqual(4)
+    })
+})
+
+
+describe("Testing psi combinator", () => {
+    it("binary function", () => {
+        const bin = (a: number, b: number) => a + b
+        const f = (str: string) => parseInt(str, 10)
+        expect(psi(bin, f)("10", "10")).toEqual(20)
+        //Below line should fail to compile btw
+        expect(psi(bin, f)("10", "10", "10", "10")).toEqual(20)
+
+    })
 })
