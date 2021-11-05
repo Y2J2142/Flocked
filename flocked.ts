@@ -4,7 +4,7 @@ type VariadicCallable<Args extends any[], Result> = (...args: Args) => Result
 
 export const idiot = <T>(t: T) => t
 
-export const kestrel = <T>(t: T) => () => t
+export const kestrel = <T>(t: T) => <U extends any[]>(...args: U) => t
 
 export const bluebird = <T extends any[], U, R>(outer: UnaryCallable<U, R>, inner: VariadicCallable<T, U>) => (...args: T) => outer(inner(...args))
 

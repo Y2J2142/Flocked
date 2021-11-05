@@ -33,6 +33,10 @@ describe("Testing kestrel combinator", () => {
 
         expect(numbers.every((elem, idx) => elem == functions[idx]())).toEqual(true)
     })
+    it("kestrel with argument", () => {
+        const str = "cat"
+        expect(kestrel(str)("dog")).toEqual(str)
+    })
 })
 
 
