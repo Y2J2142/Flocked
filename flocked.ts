@@ -22,3 +22,5 @@ export const psi = <T, U, R>(f: BinaryCallable<T, T, R>, g: UnaryCallable<U, T>)
 export const psivVariadic = <T, U, R>(f: VariadicCallableSameType<T, R>, g: UnaryCallable<U, T>) => (...args: U[]) => f(...args.map(g))
 
 export const becard = <A extends any[], B, C, D>(cd: UnaryCallable<C, D>, bc: UnaryCallable<B, C>, ab: VariadicCallable<A, B>) => (...args: A) => cd(bc(ab(...args)))
+
+export const blackbird = <A, B, C, D>(cd: UnaryCallable<C, D>, abc: BinaryCallable<A, B, C>) => (a: A, b: B) => cd(abc(a, b))

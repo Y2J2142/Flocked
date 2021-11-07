@@ -1,10 +1,5 @@
-import { idiot, psivVariadic } from '../flocked'
-import { kestrel } from '../flocked'
-import { bluebird } from '../flocked'
-import { cardinal } from '../flocked'
-import { applicator } from '../flocked'
-import { psi } from '../flocked'
-import { becard } from '../flocked'
+import { blackbird, idiot, psivVariadic, kestrel, bluebird, cardinal, applicator, psi, becard } from '../flocked'
+
 describe("Testing idiot combinator", () => {
     const randomNumber = (min: number, max: number): number => Math.random() * (max - min) + min
     const numbers = [...Array(1000)].map(_ => randomNumber(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER))
@@ -105,5 +100,12 @@ describe("Testing becards combinator", () => {
     it("variadic function", () => {
         const bec = becard((x: number) => x === 20, (x: number) => x * 2, (...x: string[]) => parseInt(x.join(""), 10))
         expect(bec("", "1", "", "0")).toEqual(true)
+    })
+})
+
+describe("Testing blackbird combinator", () => {
+    it("", () => {
+        const bb = blackbird((x: number) => x * -1, (a: number, b: number) => a + b)
+        expect(bb(3, 5)).toEqual(-8)
     })
 })
