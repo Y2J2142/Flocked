@@ -20,3 +20,5 @@ export const applicator = <T extends any[], U>(f: VariadicCallable<T, U>) => (..
 export const psi = <T, U, R>(f: BinaryCallable<T, T, R>, g: UnaryCallable<U, T>) => (a: U, b: U) => f(g(a), g(b))
 
 export const psivVariadic = <T, U, R>(f: VariadicCallableSameType<T, R>, g: UnaryCallable<U, T>) => (...args: U[]) => f(...args.map(g))
+
+export const becard = <A extends any[], B, C, D>(cd: UnaryCallable<C, D>, bc: UnaryCallable<B, C>, ab: VariadicCallable<A, B>) => (...args: A) => cd(bc(ab(...args)))

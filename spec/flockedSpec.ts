@@ -4,6 +4,7 @@ import { bluebird } from '../flocked'
 import { cardinal } from '../flocked'
 import { applicator } from '../flocked'
 import { psi } from '../flocked'
+import { becard } from '../flocked'
 describe("Testing idiot combinator", () => {
     const randomNumber = (min: number, max: number): number => Math.random() * (max - min) + min
     const numbers = [...Array(1000)].map(_ => randomNumber(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER))
@@ -93,5 +94,16 @@ describe("Testing psi combinator", () => {
         expect(psivVariadic(bin, f)("10", "10", "10", "10")).toEqual(20)
         expect(psivVariadic((a: number, b: number, c: number) => a + b + c, (x: number) => x * 2)(5, 5, 5)).toEqual(30)
 
+    })
+})
+
+describe("Testing becards combinator", () => {
+    it("unary function", () => {
+        const bec = becard((x: number) => x === 10, (x: number) => x * 2, (x: string) => parseInt(x, 10))
+        expect(bec("5")).toEqual(true)
+    })
+    it("variadic function", () => {
+        const bec = becard((x: number) => x === 20, (x: number) => x * 2, (...x: string[]) => parseInt(x.join(""), 10))
+        expect(bec("", "1", "", "0")).toEqual(true)
     })
 })
