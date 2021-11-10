@@ -1,26 +1,20 @@
-type UnaryCallable<Arg, Result> = (t: Arg) => Result
-type BinaryCallable<Arg1, Arg2, Result> = (l: Arg1, r: Arg2) => Result
-type VariadicCallableSameType<Args, Result> = (...args: Args[]) => Result
-type VariadicCallable<Args extends any[], Result> = (...args: Args) => Result
-type ArrayOfLength<T, Size extends number> = Array<T> & { readonly length: Size }
-type LengthOf<T extends any[]> = T["length"] & { length: number }
-type ParamCount<T extends (...args: any[]) => any> = LengthOf<Parameters<T>>
+import * as TT from './lib/typetraits'
 export const idiot = <T>(t: T) => t
 
 export const kestrel = <T>(t: T) => <U extends any[]>(...args: U) => t
 
-export const bluebird = <T extends any[], U, R>(outer: UnaryCallable<U, R>, inner: VariadicCallable<T, U>) => (...args: T) => outer(inner(...args))
+export const bluebird = <T extends any[], U, R>(outer: TT.UnaryCallable<U, R>, inner: TT.VariadicCallable<T, U>) => (...args: T) => outer(inner(...args))
 
 export const bluebirdVariadic = <T extends any[]>(...t: T) => t.reduce((l, r) => bluebird(l, r))
 
-export const cardinal = <T, U, R>(f: BinaryCallable<T, U, R>) => (u: U, t: T) => f(t, u)
+export const cardinal = <T, U, R>(f: TT.BinaryCallable<T, U, R>) => (u: U, t: T) => f(t, u)
 
-export const applicator = <T extends any[], U>(f: VariadicCallable<T, U>) => (...t: T) => f(...t);
+export const applicator = <T extends any[], U>(f: TT.VariadicCallable<T, U>) => (...t: T) => f(...t);
 
-export const psi = <T, U, R>(f: BinaryCallable<T, T, R>, g: UnaryCallable<U, T>) => (a: U, b: U) => f(g(a), g(b))
+export const psi = <T, U, R>(f: TT.BinaryCallable<T, T, R>, g: TT.UnaryCallable<U, T>) => (a: U, b: U) => f(g(a), g(b))
 
-export const psivVariadic = <T, U, R>(f: VariadicCallableSameType<T, R>, g: UnaryCallable<U, T>) => (...args: U[]) => f(...args.map(g))
+export const psivVariadic = <T, U, R>(f: TT.VariadicCallableSameType<T, R>, g: TT.UnaryCallable<U, T>) => (...args: U[]) => f(...args.map(g))
 
-export const becard = <A extends any[], B, C, D>(cd: UnaryCallable<C, D>, bc: UnaryCallable<B, C>, ab: VariadicCallable<A, B>) => (...args: A) => cd(bc(ab(...args)))
+export const becard = <A extends any[], B, C, D>(cd: TT.UnaryCallable<C, D>, bc: TT.UnaryCallable<B, C>, ab: TT.VariadicCallable<A, B>) => (...args: A) => cd(bc(ab(...args)))
 
-export const blackbird = <A, B, C, D>(cd: UnaryCallable<C, D>, abc: BinaryCallable<A, B, C>) => (a: A, b: B) => cd(abc(a, b))
+export const blackbird = <A, B, C, D>(cd: TT.UnaryCallable<C, D>, abc: TT.BinaryCallable<A, B, C>) => (a: A, b: B) => cd(abc(a, b))
