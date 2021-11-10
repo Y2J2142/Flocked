@@ -98,6 +98,7 @@ describe("Testing becards combinator", () => {
     it("unary function", () => {
         const bec = becard((x: number) => x === 10, (x: number) => x * 2, (x: string) => parseInt(x, 10))
         expect(bec("5")).toEqual(true)
+        expect(Curried.becard((x: number) => x === 10)((x: number) => x * 2)((x: string) => parseInt(x, 10))("5")).toEqual(bec("5"))
     })
     it("variadic function", () => {
         const bec = becard((x: number) => x === 20, (x: number) => x * 2, (...x: string[]) => parseInt(x.join(""), 10))
