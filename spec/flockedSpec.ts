@@ -1,5 +1,5 @@
 import { blackbird, idiot, psivVariadic, kestrel, bluebird, cardinal, applicator, psi, becard } from '../flocked'
-
+import * as Curried from '../curried'
 describe("Testing idiot combinator", () => {
     const randomNumber = (min: number, max: number): number => Math.random() * (max - min) + min
     const numbers = [...Array(1000)].map(_ => randomNumber(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER))
@@ -47,6 +47,8 @@ describe("Testing bluebird combinator", () => {
         const combined2 = bluebird(f, add)
         expect(combined("10")).toEqual(20)
         expect(combined2(5, "5")).toEqual(20)
+        expect(Curried.bluebird(f)(parse)("10")).toEqual(combined("10"))
+        expect(Curried.bluebird(f)(add)(5, "5")).toEqual(combined2(5, "5"))
     })
     it("combining multiple functions", () => {
         const combined = bluebird(bluebird(f, parse), makeString)
