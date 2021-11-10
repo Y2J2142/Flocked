@@ -90,7 +90,7 @@ describe("Testing psi combinator", () => {
         //Below line should ideally fail to compile btw
         expect(psivVariadic(bin, f)("10", "10", "10", "10")).toEqual(20)
         expect(psivVariadic((a: number, b: number, c: number) => a + b + c, (x: number) => x * 2)(5, 5, 5)).toEqual(30)
-
+        expect(Curried.psi(bin)(f)("10")("10")).toEqual(psi(bin, f)("10", "10"))
     })
 })
 
