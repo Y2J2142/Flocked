@@ -9,3 +9,5 @@ export const psi = <T, R>(bin: TT.BinaryCallable<T, T, R>) => <U>(unary: TT.Unar
 export const becard = <C, D>(cd: TT.UnaryCallable<C, D>) => <B>(bc: TT.UnaryCallable<B, C>) => <A>(ab: TT.UnaryCallable<A, B>) => (a: A) => cd(bc(ab(a)))
 
 export const blackbird = <C, D>(cd: TT.UnaryCallable<C, D>) => <A, B>(abc: TT.BinaryCallable<A, B, C>) => (a: A) => (b: B) => cd(abc(a, b))
+
+export const bluebirdPrime = <A, C, D>(acd: TT.BinaryCallable<A, C, D>) => (a: A) => <B>(bc: TT.UnaryCallable<B, C>) => (b: B) => acd(a, bc(b))
