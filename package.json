@@ -1,6 +1,6 @@
 {
   "name": "flocked",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "Flocked is bringing combinators and combinatory logic to typescript",
   "main": "flocked.ts",
   "homepage": "https://github.com/Y2J2142/Flocked",
