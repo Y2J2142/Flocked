@@ -20,3 +20,5 @@ export const becard = <A extends any[], B, C, D>(cd: TT.UnaryCallable<C, D>, bc:
 export const blackbird = <A, B, C, D>(cd: TT.UnaryCallable<C, D>, abc: TT.BinaryCallable<A, B, C>) => (a: A, b: B) => cd(abc(a, b))
 
 export const bluebirdPrime = <A, B, C, D>(acd: TT.BinaryCallable<A, C, D>, a: A, bc: TT.UnaryCallable<B, C>) => (b: B) => acd(a, bc(b))
+
+export const bunting = <A, B, C, D, E>(de: TT.UnaryCallable<D, E>, abcd: TT.TernaryCallable<A, B, C, D>) => (a: A, b: B, c: C) => de(abcd(a, b, c))

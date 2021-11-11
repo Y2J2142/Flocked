@@ -1,4 +1,4 @@
-import { blackbird, idiot, psivVariadic, kestrel, bluebird, cardinal, applicator, psi, becard, bluebirdPrime } from '../flocked'
+import { blackbird, idiot, psivVariadic, kestrel, bluebird, cardinal, applicator, psi, becard, bluebirdPrime, bunting } from '../flocked'
 import * as Curried from '../curried'
 describe("Testing idiot combinator", () => {
     const randomNumber = (min: number, max: number): number => Math.random() * (max - min) + min
@@ -123,5 +123,15 @@ describe("Testing bluebirdPrime combinator", () => {
         const bbPrime = bluebirdPrime(binary, 2, unary)
         expect(bbPrime(2)).toEqual(6)
         expect(bbPrime(2)).toEqual(Curried.bluebirdPrime(binary)(2)(unary)(2))
+    })
+})
+
+describe("Testing bunting combinator", () => {
+    it("", () => {
+        const unary = (n: number) => n * -1
+        const ternary = (a: number, b: number, c: number) => a + b + c
+        const bnt = bunting(unary, ternary)
+        expect(bnt(1, 2, 3)).toEqual(-6)
+        expect(Curried.bunting(unary)(ternary)(1)(2)(3)).toEqual(bnt(1, 2, 3))
     })
 })
