@@ -108,7 +108,10 @@ describe("Testing becards combinator", () => {
 
 describe("Testing blackbird combinator", () => {
     it("", () => {
-        const bb = blackbird((x: number) => x * -1, (a: number, b: number) => a + b)
+        const f1 = (x: number) => x * -1
+        const f2 = (a: number, b: number) => a + b
+        const bb = blackbird(f1, f2)
         expect(bb(3, 5)).toEqual(-8)
+        expect(bb(3, 5)).toEqual(Curried.blackbird(f1)(f2)(3)(5))
     })
 })
