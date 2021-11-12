@@ -1,5 +1,5 @@
 import { blackbird, idiot, psivVariadic, kestrel, bluebird, cardinal, applicator, psi, becard, bluebirdPrime, bunting } from '../flocked'
-import * as Curried from '../curried'
+
 describe("Testing idiot combinator", () => {
     const randomNumber = (min: number, max: number): number => Math.random() * (max - min) + min
     const numbers = [...Array(1000)].map(_ => randomNumber(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER))
@@ -43,15 +43,13 @@ describe("Testing bluebird combinator", () => {
     const makeString = (n: number) => n.toString(10)
     const add = (a: number, b: string) => a + parseInt(b, 10)
     it("combining two functions", () => {
-        const combined = bluebird(f, parse)
-        const combined2 = bluebird(f, add)
+        const combined = bluebird(f)(parse)
+        const combined2 = bluebird(f)(add)
         expect(combined("10")).toEqual(20)
         expect(combined2(5, "5")).toEqual(20)
-        expect(Curried.bluebird(f)(parse)("10")).toEqual(combined("10"))
-        expect(Curried.bluebird(f)(add)(5, "5")).toEqual(combined2(5, "5"))
     })
     it("combining multiple functions", () => {
-        const combined = bluebird(bluebird(f, parse), makeString)
+        const combined = bluebird(bluebird(f)(parse))(makeString)
         expect(combined(10)).toEqual(20)
     })
 
@@ -86,22 +84,20 @@ describe("Testing psi combinator", () => {
     it("binary function", () => {
         const bin = (a: number, b: number) => a + b
         const f = (str: string) => parseInt(str, 10)
-        expect(psi(bin, f)("10", "10")).toEqual(20)
+        expect(psi(bin)(f)("10")("10")).toEqual(20)
         //Below line should ideally fail to compile btw
         expect(psivVariadic(bin, f)("10", "10", "10", "10")).toEqual(20)
         expect(psivVariadic((a: number, b: number, c: number) => a + b + c, (x: number) => x * 2)(5, 5, 5)).toEqual(30)
-        expect(Curried.psi(bin)(f)("10")("10")).toEqual(psi(bin, f)("10", "10"))
     })
 })
 
 describe("Testing becards combinator", () => {
     it("unary function", () => {
-        const bec = becard((x: number) => x === 10, (x: number) => x * 2, (x: string) => parseInt(x, 10))
+        const bec = becard((x: number) => x === 10)((x: number) => x * 2)((x: string) => parseInt(x, 10))
         expect(bec("5")).toEqual(true)
-        expect(Curried.becard((x: number) => x === 10)((x: number) => x * 2)((x: string) => parseInt(x, 10))("5")).toEqual(bec("5"))
     })
     it("variadic function", () => {
-        const bec = becard((x: number) => x === 20, (x: number) => x * 2, (...x: string[]) => parseInt(x.join(""), 10))
+        const bec = becard((x: number) => x === 20)((x: number) => x * 2)((...x: string[]) => parseInt(x.join(""), 10))
         expect(bec("", "1", "", "0")).toEqual(true)
     })
 })
@@ -110,9 +106,8 @@ describe("Testing blackbird combinator", () => {
     it("", () => {
         const f1 = (x: number) => x * -1
         const f2 = (a: number, b: number) => a + b
-        const bb = blackbird(f1, f2)
-        expect(bb(3, 5)).toEqual(-8)
-        expect(bb(3, 5)).toEqual(Curried.blackbird(f1)(f2)(3)(5))
+        const bb = blackbird(f1)(f2)
+        expect(bb(3)(5)).toEqual(-8)
     })
 })
 
@@ -120,9 +115,8 @@ describe("Testing bluebirdPrime combinator", () => {
     it("", () => {
         const unary = (x: number) => x + 1
         const binary = (x: number, y: number) => x * y
-        const bbPrime = bluebirdPrime(binary, 2, unary)
+        const bbPrime = bluebirdPrime(binary)(2)(unary)
         expect(bbPrime(2)).toEqual(6)
-        expect(bbPrime(2)).toEqual(Curried.bluebirdPrime(binary)(2)(unary)(2))
     })
 })
 
@@ -130,8 +124,7 @@ describe("Testing bunting combinator", () => {
     it("", () => {
         const unary = (n: number) => n * -1
         const ternary = (a: number, b: number, c: number) => a + b + c
-        const bnt = bunting(unary, ternary)
-        expect(bnt(1, 2, 3)).toEqual(-6)
-        expect(Curried.bunting(unary)(ternary)(1)(2)(3)).toEqual(bnt(1, 2, 3))
+        const bnt = bunting(unary)(ternary)
+        expect(bnt(1)(2)(3)).toEqual(-6)
     })
 })
