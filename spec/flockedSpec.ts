@@ -1,4 +1,4 @@
-import { blackbird, idiot, psivVariadic, kestrel, bluebird, cardinal, applicator, psi, becard, bluebirdPrime, bunting } from '../flocked'
+import { blackbird, idiot, psivVariadic, kestrel, bluebird, cardinal, applicator, psi, becard, bluebirdPrime, bunting, cardinalPrime, cardinalStar } from '../flocked'
 
 describe("Testing idiot combinator", () => {
     const randomNumber = (min: number, max: number): number => Math.random() * (max - min) + min
@@ -128,3 +128,16 @@ describe("Testing bunting combinator", () => {
         expect(bnt(1)(2)(3)).toEqual(-6)
     })
 })
+
+describe("Testing cardinal' combinator", () => {
+    it("", () => {
+        expect(cardinalPrime((x: number, y: number) => x * y)((x: number) => x + 1)(2)(3)).toEqual(8)
+    })
+})
+
+describe("Testing cardinal* combinator", () => {
+    it("", () => {
+        expect(cardinalStar((x: number, y: number, z: number) => (x + y) * z)(1)(2)(3)).toEqual(8)
+    })
+})
+

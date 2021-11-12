@@ -9,3 +9,4 @@ export const B1 = Birds.blackbird
 export const BPrime = Birds.bluebirdPrime
 export const B2 = Birds.bunting
 export const CPrime = Birds.cardinalPrime
+export const CStar = Birds.cardinalStar

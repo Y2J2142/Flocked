@@ -23,3 +23,5 @@ export const bluebirdPrime = <A, C, D>(acd: TT.BinaryCallable<A, C, D>) => (a: A
 export const bunting = <D, E>(de: TT.UnaryCallable<D, E>) => <A, B, C>(abcd: TT.TernaryCallable<A, B, C, D>) => (a: A) => (b: B) => (c: C) => de(abcd(a, b, c))
 
 export const cardinalPrime = <C, A, D>(cad: TT.BinaryCallable<C, A, D>) => <B>(bc: TT.UnaryCallable<B, C>) => (a: A) => (b: B) => cad(bc(b), a)
+
+export const cardinalStar = <A, C, B, D>(acbd: TT.TernaryCallable<A, C, B, D>) => (a: A) => (b: B) => (c: C) => acbd(a, c, b)
